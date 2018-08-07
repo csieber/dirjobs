@@ -50,6 +50,20 @@ Processing: jobs/01_running/w1.job2.txt
 No more jobs!
 ```
 
+## QUICKSTART (multiple workers)
+
+Use the argument *wid* to create multiple workers. 
+
+**Important**: Worker IDs have to be unique !
+
+Example first worker:
+
+    dj = DirJobs("jobs/", wid="w1")
+ 
+Example second worker:
+
+    dj = DirJobs("jobs/", wid="w2")
+
 ## Examples
 
 ### Filter jobs
@@ -64,6 +78,10 @@ Example: Only select jobs with *tag* in their filename:
             return True
         else:
             return False
-            
-    dj = DirJobs("jobs", job_filter=job_filter)
-´´´
+
+    dj = DirJobs("jobs/", job_filter=job_filter)
+```
+
+### WebDAV mounts
+
+*Will follow soon*
