@@ -1,12 +1,16 @@
 # dirjobs - A simple file-based multi-worker, single-queue job queue
 
+Provides a Python file/directory-based simple job queue with support for multiple workers and lazy synchronization. Designed to work over webdav or Windows share mounts without any locking mechanisms available.
+
 Features:
 
   * File / Directory-based, no use of locks
   * Works over network mounts such as webdav or Windows shares
   * 4 job states: *waiting*, *running*, *done* and *failed*
+  * Synchronization by waiting if another worker also claims the job
+  * In case of conflict, the job gets assigned to the first worker in lexicographical order
 
-## QUICKSTART
+## QUICKSTART (one worker)
 
 Create a folder for waiting jobs:
 
@@ -18,7 +22,6 @@ Create empty jobs:
     touch jobs/00_waiting/job2.txt
     
 Afterwards run:
-
 
 ```
 from dirjobs import DirJobs
@@ -46,3 +49,21 @@ Processing: jobs/01_running/w1.job1.txt
 Processing: jobs/01_running/w1.job2.txt
 No more jobs!
 ```
+
+## Examples
+
+### Filter jobs
+
+Jobs can be filtered by a filter function with the signature *func(path, name) -> boolean*.
+
+Example: Only select jobs with *tag* in their filename:
+
+```
+    def job_filter(path, name):
+        if "tag" in name:
+            return True
+        else:
+            return False
+            
+    dj = DirJobs("jobs", job_filter=job_filter)
+´´´
