@@ -22,14 +22,14 @@ Notes:
 Create a folder for waiting jobs:
 
 ```bash
-    mkdir -p jobs/00_waiting
+mkdir -p jobs/00_waiting
 ```
     
 Create empty jobs:
 
 ```bash
-    touch jobs/00_waiting/job1.txt
-    touch jobs/00_waiting/job2.txt
+touch jobs/00_waiting/job1.txt
+touch jobs/00_waiting/job2.txt
 ```
     
 Afterwards run:
@@ -70,13 +70,13 @@ Use the argument *wid* to create multiple workers.
 Example first worker:
 
 ```python
-    dj = DirJobs("jobs/", wid="w1")
+dj = DirJobs("jobs/", wid="w1")
 ```
  
 Example second worker:
 
 ```python
-    dj = DirJobs("jobs/", wid="w2")
+dj = DirJobs("jobs/", wid="w2")
 ```
 
 ## Examples
@@ -88,13 +88,13 @@ Jobs can be filtered by a filter function with the signature *func(path, name) -
 Example: Only select jobs with *tag* in their filename:
 
 ```python
-    def job_filter(path, name):
-        if "tag" in name:
-            return True
-        else:
-            return False
+def job_filter(path, name):
+    if "tag" in name:
+        return True
+    else:
+        return False
 
-    dj = DirJobs("jobs/", job_filter=job_filter)
+dj = DirJobs("jobs/", job_filter=job_filter)
 ```
 
 ### WebDAV mounts
