@@ -108,7 +108,7 @@ sudo mount.davfs -o uid=`whoami` https://YOUR_WEBDAV_URL/ WEBDAV/
 Activate *worker_sync* and set a *sync_time* in seconds:
 
 ```python
-dj = DirJobs(args.jobdir,
+dj = DirJobs("WEBDAV/jobs/",
              wid="w1",
              worker_sync=True,
              sync_time=70)
