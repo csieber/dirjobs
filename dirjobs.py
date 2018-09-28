@@ -68,7 +68,7 @@ class DirJobs(object):
         self._jobsdir = jobsdir
         self._wid = wid
         self._rnd_job = rnd_job
-        self._job_ext = ".txt"
+        self._job_ext = job_ext
         self._worker_sync = worker_sync
         self._sync_time = sync_time
         self._job_filter = job_filter
